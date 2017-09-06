@@ -4,6 +4,7 @@ Puppet::Type.type(:runlevel).provide(:telinit) do
   EOM
 
   commands :telinit => '/sbin/telinit'
+  confine :exists => '/etc/inittab'
 
   def level
     Facter.value(:runlevel)

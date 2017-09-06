@@ -8,6 +8,8 @@ Facter.add('grub_version') do
       grub_version = Facter::Util::Resolution.exec('grub --version').split.last.delete('()')
     elsif Facter::Util::Resolution.which('grub2-mkconfig') then
       grub_version = Facter::Util::Resolution.exec('grub2-mkconfig --version').split.last.delete('()')
-    end
+    elsif Facter::Util::Resolution.which('update-grub2') then
+      grub_version = Facter::Util::Resolution.exec('update-grub2 --version').split.last.delete('()')
+      end
   end
 end
