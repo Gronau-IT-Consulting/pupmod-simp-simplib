@@ -45,7 +45,9 @@ Puppet::Type.type(:reboot_notify).provide(:notify) do
     target = "#{Puppet[:vardir]}/reboot_notifications.json"
     records = {}
     begin
-      records = PSON.parse(File.read(target))
+      if File.exist?(target) then
+        records = PSON.parse(File.read(target))
+      end
     rescue
       Puppet.error("Could not parse file: #{target}")
     end
